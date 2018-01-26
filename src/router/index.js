@@ -12,5 +12,5 @@ export default new Router({
       component: Home
     }
   ],
-  mode: history
+  mode: 'history'
 })
