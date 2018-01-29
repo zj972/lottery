@@ -16,7 +16,8 @@
           {{item.name}}
           <el-input-number v-model="number[item.type]" @change="handleChangeNumber" :min="0" :max="remain[item.type]" size="mini"></el-input-number>
         </div>
-        <el-button type="success" size="small" @click="selectWinner">抽取</el-button>
+        <el-button type="success" size="small" @click="start">开始</el-button>
+        <el-button type="success" size="small" @click="selectWinner">停止</el-button>
       </el-card>
       <!-- 结果 -->
       <div class="result-box">
@@ -66,7 +67,9 @@ export default {
       // 存储抽取奖品的数量上限
       remain: [],
       // 中奖结果
-      showWinner: false
+      showWinner: false,
+      // 抽奖效果循环Key
+      loopKey: false
     }
   },
   mounted () {
@@ -75,11 +78,16 @@ export default {
     this.prize.map(v => {
       this.remain[v.type] = v.data.length
     })
+    // 获取获奖动画画布
+    let canvas = document.getElementsByTagName('canvas')[0]
+    console.log(canvas)
   },
   methods: {
     handleChangeNumber (val) {
     },
     selectWinner () {
+      // 停止动画
+      this.loopKey = false
       // 计算奖品总数
       let sum = 0
       this.number.map(v => {
@@ -117,6 +125,35 @@ export default {
       })
       this.winner = this.winner.concat(user)
       this.number = []
+      // 渲染遮罩层
+      this.showWinner = true
+    },
+    start () {
+      // 计算奖品总数
+      let sum = 0
+      this.number.map(v => {
+        sum += v
+      })
+      this.loopKey = true
+      for (let i = 0; i < sum; i++) {
+        this.loopUser()
+      }
+    },
+    loopUser () {
+      let length = this.user.length
+      let index = parseInt(Math.random() * length, 10)
+      let obj = this
+      if (this.user[index].check === '') {
+        this.user[index].check = 'focus'
+        setTimeout(() => {
+          obj.user[index].check = ''
+          if (this.loopKey) {
+            obj.loopUser()
+          }
+        }, 50)
+      } else {
+        this.loopUser()
+      }
     }
   }
 }

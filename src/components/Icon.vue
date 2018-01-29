@@ -50,22 +50,19 @@ $radius: 90;
     width: #{$radius}px;
     height: #{$radius}px;
     border-radius: #{$radius}px;
-    border: 4px solid #ccbb11;
-    background: #ccbb11;
+    /*border: 4px solid #ccbb11;*/
+    border: 4px solid rgba(0, 0, 0, .3);
     box-shadow: 4px 4px 4px 2px rgb(94, 17, 17);
     overflow: hidden;
     z-index: 100;
     &.check {
       border: 4px solid #7d040b;
-      background: #7d040b;
     }
     &.none {
       border: 4px solid #afafaf;
-      background: #afafaf;
     }
     &.focus {
-      border: 4px solid #eeff00;
-      background: #eeff00;
+      border: 4px solid #ccbb11;
     }
     .photo {
       position: absolute;
