@@ -98,7 +98,7 @@ export default {
         sum += v
       })
       if (sum > 8) {
-        alert('最多可选8个人')
+        alert('最多只可以选8个人哦~')
       }
     },
     selectWinner () {
@@ -189,6 +189,12 @@ export default {
           residue++
         }
       })
+      if (sum > residue) {
+        alert('人数不够啦~')
+      }
+      if (!sum) {
+        alert('没有选奖品，这是要抽空气吗？')
+      }
       if (!sum || sum > residue || this.loopKey === true) {
         return
       }
