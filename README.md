@@ -2,29 +2,28 @@
 
 > A Lottery Systeam
 
-## Build Setup
+抽奖系统
 
-``` bash
-# install dependencies
-npm install
+index文件在dist里，需要配置nginx和host指向，然后打开lottery.oa.com就可以啦，参考如下：
 
-# serve with hot reload at localhost:8080
-npm run dev
+nginx.conf
 
-# build for production with minification
-npm run build
+```
+server {
+        listen       80;
+        server_name  lottery.oa.com;
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+        location / {
+            root   E:\SarboYang/lottery/dist;
+            index  index.html index.htm;
+            try_files $uri $uri/ /index.html;
+        }
+    }
+}
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+host
+
+```
+127.0.0.1 lottery.oa.com
+```
