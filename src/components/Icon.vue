@@ -51,7 +51,7 @@ $radius: 90;
     height: #{$radius}px;
     border-radius: #{$radius}px;
     /*border: 4px solid #ccbb11;*/
-    border: 4px solid rgba(0, 0, 0, .3);
+    border: 4px solid #B9000A;
     box-shadow: 4px 4px 4px 2px rgb(94, 17, 17);
     overflow: hidden;
     z-index: 100;
