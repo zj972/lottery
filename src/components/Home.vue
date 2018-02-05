@@ -42,8 +42,6 @@
 <script>
 import Icon from './Icon'
 import Winner from './Winner'
-import User from '../assets/json/user.json'
-import Prize from '../assets/json/prize.json'
 import Confetti from '../assets/js/canvas'
 
 export default {
@@ -77,8 +75,8 @@ export default {
       this.remain = data.remain
     } else {
       // 第一次打开
-      this.user = User
-      this.prize = Prize
+      this.user = window.User
+      this.prize = window.Prize
       this.prize.map(v => {
         this.remain[v.type] = v.data.length
       })
@@ -137,7 +135,7 @@ export default {
         this.remain[value.type] -= num
       })
       // 合并用户和奖品
-      user.map((value, index) => {
+       user.map((value, index) => {
         value.prize = check[index]
         return value
       })
@@ -195,7 +193,10 @@ export default {
       if (!sum) {
         alert('没有选奖品，这是要抽空气吗？')
       }
-      if (!sum || sum > residue || this.loopKey === true) {
+      if (sum > 8) {
+        alert('最多只可以选8个人哦~')
+      }
+      if (!sum || sum > residue || this.loopKey === true || sum > 8) {
         return
       }
       this.loopKey = true
@@ -267,7 +268,7 @@ export default {
       height: 100%;
       .prize {
         display: flex;
-        height: 120px;
+        height: 100px;
         justify-content: center;
         align-items: center;
       }
